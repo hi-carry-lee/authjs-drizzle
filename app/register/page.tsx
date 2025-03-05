@@ -21,20 +21,20 @@ import { Input } from "@/components/ui/input";
 import * as z from "zod";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
+import { Button } from "@/components/ui/button";
+import { passwordMatchSchema } from "@/validation/passwordMatchSchema";
+import Link from "next/link";
+import { registerUser } from "@/app/register/actions";
 
-const userSchema = z.object({
-  email: z.string().email({
-    message: "Email is required!",
-  }),
-  password: z.string().min(6, {
-    message: "Minimum 6 characters required",
-  }),
-  passwordConfirm: z.string(),
-});
+const userSchema = z
+  .object({
+    email: z.string().email({
+      message: "Email is required!",
+    }),
+  })
+  .and(passwordMatchSchema);
 
 function RegisterPage() {
-  // z.infer<typeof formSchema>：typeof userSchema 获取 schema 对象的类型
-  // z.infer<...> 将这个 schema 类型转换为对应的 TypeScript 接口类型
   const form = useForm<z.infer<typeof userSchema>>({
     resolver: zodResolver(userSchema),
     defaultValues: {
@@ -44,9 +44,14 @@ function RegisterPage() {
     },
   });
 
-  console.log("form: ", form);
-  function handleSubmit(data: z.infer<typeof userSchema>) {
+  async function handleSubmit(data: z.infer<typeof userSchema>) {
     console.log(data);
+    const response = await registerUser({
+      email: data.email,
+      password: data.password,
+      passwordConfirm: data.passwordConfirm,
+    });
+    console.log(response);
   }
 
   return (
@@ -58,24 +63,62 @@ function RegisterPage() {
         </CardHeader>
         <CardContent>
           <Form {...form}>
-            <form onSubmit={form.handleSubmit(handleSubmit)}>
+            <form
+              onSubmit={form.handleSubmit(handleSubmit)}
+              className="flex flex-col gap-4"
+            >
               <FormField
                 control={form.control}
                 name="email"
                 render={({ field }) => (
                   <FormItem>
-                    <FormLabel></FormLabel>
+                    <FormLabel>Email</FormLabel>
                     <FormControl>
-                      <Input placeholder="John@Doe.com" {...field} />
+                      <Input
+                        placeholder="John@Doe.com"
+                        {...field}
+                        type="text"
+                      />
                     </FormControl>
                     <FormMessage />
                   </FormItem>
                 )}
               />
+              <FormField
+                control={form.control}
+                name="password"
+                render={({ field }) => (
+                  <FormItem>
+                    <FormLabel>Password</FormLabel>
+                    <FormControl>
+                      <Input placeholder="******" {...field} type="password" />
+                    </FormControl>
+                    <FormMessage />
+                  </FormItem>
+                )}
+              />
+              <FormField
+                control={form.control}
+                name="passwordConfirm"
+                render={({ field }) => (
+                  <FormItem>
+                    <FormLabel>Password Confirm</FormLabel>
+                    <FormControl>
+                      <Input placeholder="******" {...field} type="password" />
+                    </FormControl>
+                    <FormMessage />
+                  </FormItem>
+                )}
+              />
+              <Button type="submit">Register</Button>
             </form>
           </Form>
         </CardContent>
-        <CardFooter>Card Footer</CardFooter>
+        <CardFooter>
+          <CardDescription>
+            Already has an account?<Link href="/auth/login">Log in</Link>
+          </CardDescription>
+        </CardFooter>
       </Card>
     </main>
   );
