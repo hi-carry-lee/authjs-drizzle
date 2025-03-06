@@ -52,74 +52,103 @@ function RegisterPage() {
       passwordConfirm: data.passwordConfirm,
     });
     console.log(response);
+    if (response?.error) {
+      form.setError("email", {
+        message: response?.message,
+      });
+    }
   }
 
   return (
     <main className="flex items-center justify-center min-h-screen">
-      <Card className="w-[350px]">
-        <CardHeader>
-          <CardTitle>Register</CardTitle>
-          <CardDescription>Register your account.</CardDescription>
-        </CardHeader>
-        <CardContent>
-          <Form {...form}>
-            <form
-              onSubmit={form.handleSubmit(handleSubmit)}
-              className="flex flex-col gap-4"
-            >
-              <FormField
-                control={form.control}
-                name="email"
-                render={({ field }) => (
-                  <FormItem>
-                    <FormLabel>Email</FormLabel>
-                    <FormControl>
-                      <Input
-                        placeholder="John@Doe.com"
-                        {...field}
-                        type="text"
-                      />
-                    </FormControl>
-                    <FormMessage />
-                  </FormItem>
-                )}
-              />
-              <FormField
-                control={form.control}
-                name="password"
-                render={({ field }) => (
-                  <FormItem>
-                    <FormLabel>Password</FormLabel>
-                    <FormControl>
-                      <Input placeholder="******" {...field} type="password" />
-                    </FormControl>
-                    <FormMessage />
-                  </FormItem>
-                )}
-              />
-              <FormField
-                control={form.control}
-                name="passwordConfirm"
-                render={({ field }) => (
-                  <FormItem>
-                    <FormLabel>Password Confirm</FormLabel>
-                    <FormControl>
-                      <Input placeholder="******" {...field} type="password" />
-                    </FormControl>
-                    <FormMessage />
-                  </FormItem>
-                )}
-              />
-              <Button type="submit">Register</Button>
-            </form>
-          </Form>
-        </CardContent>
-        <CardFooter>
-          <CardDescription>
-            Already has an account?<Link href="/auth/login">Log in</Link>
-          </CardDescription>
-        </CardFooter>
-      </Card>
+      {form.formState.isSubmitSuccessful ? (
+        <Card className="w-[350px]">
+          <CardHeader>
+            <CardTitle>Your account has been created</CardTitle>
+          </CardHeader>
+          <CardContent>
+            {/* w-full let the button occupy the whole width */}
+            <Button asChild className="w-full">
+              <Link href="/login">Login to your account</Link>
+            </Button>
+          </CardContent>
+        </Card>
+      ) : (
+        <Card className="w-[350px]">
+          <CardHeader>
+            <CardTitle>Register</CardTitle>
+            <CardDescription>Register your account.</CardDescription>
+          </CardHeader>
+          <CardContent>
+            <Form {...form}>
+              <form onSubmit={form.handleSubmit(handleSubmit)}>
+                <fieldset
+                  disabled={form.formState.isSubmitting}
+                  className="flex flex-col gap-4"
+                >
+                  <FormField
+                    control={form.control}
+                    name="email"
+                    render={({ field }) => (
+                      <FormItem>
+                        <FormLabel>Email</FormLabel>
+                        <FormControl>
+                          <Input
+                            placeholder="John@Doe.com"
+                            {...field}
+                            type="text"
+                          />
+                        </FormControl>
+                        <FormMessage />
+                      </FormItem>
+                    )}
+                  />
+                  <FormField
+                    control={form.control}
+                    name="password"
+                    render={({ field }) => (
+                      <FormItem>
+                        <FormLabel>Password</FormLabel>
+                        <FormControl>
+                          <Input
+                            placeholder="******"
+                            {...field}
+                            type="password"
+                          />
+                        </FormControl>
+                        <FormMessage />
+                      </FormItem>
+                    )}
+                  />
+                  <FormField
+                    control={form.control}
+                    name="passwordConfirm"
+                    render={({ field }) => (
+                      <FormItem>
+                        <FormLabel>Password Confirm</FormLabel>
+                        <FormControl>
+                          <Input
+                            placeholder="******"
+                            {...field}
+                            type="password"
+                          />
+                        </FormControl>
+                        <FormMessage />
+                      </FormItem>
+                    )}
+                  />
+                  <Button type="submit">Register</Button>
+                </fieldset>
+              </form>
+            </Form>
+          </CardContent>
+          <CardFooter>
+            <CardDescription>
+              Already has an account?<Link href="/auth/login">Log in</Link>
+            </CardDescription>
+          </CardFooter>
+        </Card>
+      )}
     </main>
   );
 }
