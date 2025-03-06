@@ -144,7 +144,7 @@ function RegisterPage() {
           </CardContent>
           <CardFooter>
             <CardDescription>
-              Already has an account?<Link href="/auth/login">Log in</Link>
+              Already has an account?<Link href="/login">Log in</Link>
             </CardDescription>
           </CardFooter>
         </Card>
