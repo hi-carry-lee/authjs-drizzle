@@ -142,10 +142,14 @@ function RegisterPage() {
               </form>
             </Form>
           </CardContent>
-          <CardFooter>
-            <CardDescription>
-              Already has an account?<Link href="/login">Log in</Link>
-            </CardDescription>
+          {/* the CardFooter already had style, and the following class name will be added to that*/}
+          <CardFooter className="flex-col">
+            <div className="text-muted-foreground text-sm">
+              Already has an account?{" "}
+              <Link href="/login" className="underline">
+                Log in
+              </Link>
+            </div>
           </CardFooter>
         </Card>
       )}
