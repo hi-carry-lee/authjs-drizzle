@@ -122,7 +122,13 @@ function LoginPage() {
           <div className="text-muted-foreground text-sm">
             Forget password?{" "}
             <Link
-              href={`/password-reset?email=${form.getValues("email")}`}
+              // this is a best practice of passing valur from url
+              href={{
+                pathname: "/password-reset",
+                query: form.getValues("email")
+                  ? { email: form.getValues("email") }
+                  : {},
+              }}
               className="underline"
             >
               Reset my password

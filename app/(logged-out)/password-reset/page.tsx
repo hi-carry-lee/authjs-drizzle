@@ -25,6 +25,7 @@ import { Input } from "@/components/ui/input";
 
 import { Button } from "@/components/ui/button";
 import { useSearchParams } from "next/navigation";
+import { resetPassword } from "./actions";
 
 const emailSchema = z.object({
   email: z.string().email({
@@ -45,6 +46,7 @@ function PasswordReset() {
   const handleSubmit = async (data: z.infer<typeof emailSchema>) => {
     // clear errors before submit is a best practice
     form.clearErrors();
+    await resetPassword(data.email);
     console.log(data);
   };
 
@@ -72,7 +74,6 @@ function PasswordReset() {
                     <FormControl>
                       <Input
                         placeholder="John@Doe.com"
-                        defaultValue={email}
                         {...field}
                         type="text"
                       />
