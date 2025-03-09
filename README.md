@@ -21,3 +21,5 @@ Open [http://localhost:3000](http://localhost:3000) with your browser to see the
 1. add small spinner on the button when waiting for the result of register or login
 
 2. add error message for specific field in login form;
+
+3. add OAuth login

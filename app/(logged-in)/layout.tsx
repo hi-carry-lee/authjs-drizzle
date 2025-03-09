@@ -9,7 +9,7 @@ async function LoggedInLayout({
   children: React.ReactNode;
 }>) {
   const session = await auth();
-  console.log("logged in session: ", session);
+  // console.log("logged in session: ", session);
   if (!session?.user?.id) {
     redirect("/login");
   }
