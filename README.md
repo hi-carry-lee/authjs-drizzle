@@ -1,4 +1,20 @@
-This is a Next.js project used to practice Auth.js and Drizzle.
+# Next.js Authentication Practice
+
+This is a learning project built with Next.js to practice implementing authentication using Auth.js and database operations with Drizzle ORM.
+
+## About This Project
+
+I created this repository as a hands-on way to explore Authjs and improve my skills. It's meant to be a collaborative learning space where we can grow together.
+
+## Join the Learning Journey
+
+If you're also interested in learning about these technologies or have knowledge to share:
+
+- Star the repo if you find it useful
+- Open an issue for questions or suggestions
+- Submit PRs to improve the codebase or add new features
+
+Let's learn together! All skill levels are welcome.
 
 ## Getting Started
 
@@ -16,16 +32,20 @@ bun dev
 
 Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
 
-## wait for more
+# Pending Features
 
-1. add small spinner on the button when waiting for the result of register or login
+## User Experience Improvements
 
-2. add error message for specific field in login form;
+- [ ] Add loading spinners on register/login buttons when waiting for results
+- [ ] Implement field-specific error messages in the login form
+- [ ] Add OAuth login support
+- [ ] Implement password reset throttling (including UI and backend)
 
-3. add OAuth login support
+## Component Reusability
 
-4. add Password reset throttling, include UI and backend
+- [ ] Create reusable components for update/modify operations
+- [ ] Develop reusable message popup components for displaying operation statuses (e.g., "Password updated successfully")
 
-5. create reusable component for update modify;
+## Note
 
-6. create reusable component for message popup, like update password successfully;
+These features will be implemented gradually. Contributions and suggestions are welcome.
