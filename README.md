@@ -22,4 +22,10 @@ Open [http://localhost:3000](http://localhost:3000) with your browser to see the
 
 2. add error message for specific field in login form;
 
-3. add OAuth login
+3. add OAuth login support
+
+4. add Password reset throttling, include UI and backend
+
+5. create reusable component for update modify;
+
+6. create reusable component for message popup, like update password successfully;
