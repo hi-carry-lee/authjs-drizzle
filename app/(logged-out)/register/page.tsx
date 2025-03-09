@@ -24,7 +24,7 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { Button } from "@/components/ui/button";
 import { passwordMatchSchema } from "@/validation/passwordMatchSchema";
 import Link from "next/link";
-import { registerUser } from "@/app/register/actions";
+import { registerUser } from "@/app/(logged-out)/register/actions";
 
 const userSchema = z
   .object({

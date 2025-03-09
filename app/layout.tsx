@@ -1,8 +1,6 @@
 import type { Metadata } from "next";
 import { Poppins } from "next/font/google";
 import "./globals.css";
-import { auth } from "@/auth";
-import LogoutButton from "./logout-button";
 
 const poppins = Poppins({
   subsets: ["latin"],
@@ -30,22 +28,9 @@ export default async function RootLayout({
 }: Readonly<{
   children: React.ReactNode;
 }>) {
-  const session = await auth();
   return (
     <html lang="en">
-      <body className={`${poppins.className} antialiased`}>
-        <div>
-          {session?.user?.email ? (
-            <div>
-              {session.user.email}
-              <LogoutButton />
-            </div>
-          ) : (
-            "No currectly logged in user"
-          )}
-        </div>
-        {children}
-      </body>
+      <body className={`${poppins.className} antialiased`}>{children}</body>
     </html>
   );
 }
