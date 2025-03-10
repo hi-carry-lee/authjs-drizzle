@@ -2,9 +2,20 @@ import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { auth } from "@/auth";
 import { Label } from "@/components/ui/label";
 import Link from "next/link";
+import db from "@/db/drizzle";
+import TwoFactor from "./_two-factor/two-factor";
+import { users } from "@/db/usersSchema";
+import { eq } from "drizzle-orm";
 
 async function MyAccount() {
   const session = await auth();
+  const [user] = await db
+    .select({
+      twoFactorAuthActivated: users.twoFactorActivated,
+    })
+    .from(users)
+    .where(eq(users.id, parseInt(session?.user?.id as string)));
+
   return (
     <Card className="w-[350px]">
       <CardHeader>
@@ -13,6 +24,8 @@ async function MyAccount() {
       <CardContent>
         <Label>Email:</Label>
         <div className="text-muted-foreground">{session?.user?.email}</div>
+
+        <TwoFactor twoFactorActivated={user.twoFactorAuthActivated ?? false} />
         <div className="border mt-2"></div>
         <div className="mt-2">
           <Link
