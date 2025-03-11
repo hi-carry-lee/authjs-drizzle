@@ -63,7 +63,7 @@ function TwoFactor({ twoFactorActivated }: { twoFactorActivated: boolean }) {
   };
 
   return (
-    <div className="border my-2">
+    <div className="my-2">
       {!!isActivated && (
         <Button variant="destructive" onClick={handleDisable2faClick}>
           Disable Two-Factor Authentication

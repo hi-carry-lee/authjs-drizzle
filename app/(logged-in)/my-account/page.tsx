@@ -9,12 +9,15 @@ import { eq } from "drizzle-orm";
 
 async function MyAccount() {
   const session = await auth();
+  if (!session?.user) {
+    return;
+  }
   const [user] = await db
     .select({
       twoFactorAuthActivated: users.twoFactorActivated,
     })
     .from(users)
-    .where(eq(users.id, parseInt(session?.user?.id as string)));
+    .where(eq(users.id, parseInt(session?.user?.id ?? "")));
 
   return (
     <Card className="w-[350px]">
