@@ -46,6 +46,11 @@ Open [http://localhost:3000](http://localhost:3000) with your browser to see the
 - [ ] Create reusable components for update/modify operations
 - [ ] Develop reusable message popup components for displaying operation statuses (e.g., "Password updated successfully")
 
+## Function Testing
+
+- [ ] authorize function in auth.ts, check if return {error:true} work properly;
+- [ ] handle different errors that happens in the auth.ts file;
+
 ## Note
 
 These features will be implemented gradually. Contributions and suggestions are welcome.
