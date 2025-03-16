@@ -14,7 +14,7 @@ async function MyAccount() {
   }
   const [user] = await db
     .select({
-      twoFactorAuthActivated: users.twoFactorActivated,
+      twoFactorActivated: users.twoFactorActivated,
     })
     .from(users)
     .where(eq(users.id, parseInt(session?.user?.id ?? "")));
@@ -28,7 +28,7 @@ async function MyAccount() {
         <Label>Email:</Label>
         <div className="text-muted-foreground">{session?.user?.email}</div>
 
-        <TwoFactor twoFactorActivated={user.twoFactorAuthActivated ?? false} />
+        <TwoFactor twoFactorActivated={user.twoFactorActivated ?? false} />
         <div className="border mt-2"></div>
         <div className="mt-2">
           <Link
